@@ -61,39 +61,34 @@ const App = () => {
   return (
     <div id="main">
       <div>{ErrorMessage}</div>
-      <form>
-        <label>Name:</label>
-        <input data-testid="name" name="Name" onChange={handlechange} />
-        <br />
-        <label>Email address:</label>
-        <input data-testid="email" name="email" onChange={handlechange} />
-        <br />
-        <label>Gender:</label>
-        <select
-          defaultValue="selectgender"
-          name="Gender"
-          onChange={handlechange}
-        >
-          <option defaultValue>Male</option>
-          <option value="Female">Female</option>
-          <option value="others">Others</option>
-        </select>
-        <br />
-        <label>Phone number:</label>
-        <input data-testid="phoneNumber" name="phone" onChange={handlechange} />
-        <br />
-        <label>Password:</label>
-        <input
-          data-testid="password"
-          type="password"
-          name="password"
-          onChange={handlechange}
-        />
-        <br />
-        <button data-testid="submit" onClick={handleclick}>
-          Submit
-        </button>
-      </form>
+
+      <label>Name:</label>
+      <input data-testid="name" name="Name" onChange={handlechange} />
+      <br />
+      <label>Email address:</label>
+      <input data-testid="email" name="email" onChange={handlechange} />
+      <br />
+      <label>Gender:</label>
+      <select defaultValue="selectgender" name="Gender" onChange={handlechange}>
+        <option defaultValue>Male</option>
+        <option value="Female">Female</option>
+        <option value="others">Others</option>
+      </select>
+      <br />
+      <label>Phone number:</label>
+      <input data-testid="phoneNumber" name="phone" onChange={handlechange} />
+      <br />
+      <label>Password:</label>
+      <input
+        data-testid="password"
+        type="password"
+        name="password"
+        onChange={handlechange}
+      />
+      <br />
+      <button data-testid="submit" onClick={handleclick}>
+        Submit
+      </button>
     </div>
   );
 };
