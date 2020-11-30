@@ -1,33 +1,52 @@
-import React, { Component, useState } from "react";
-import "../styles/App.css";
+import React, { useEffect, useState } from "react";
 
 const App = () => {
+  let error = false;
   let [ErrorMessage, setErrorMessage] = useState("");
-  const [input, setinput] = useState({
-    Name: "",
-    email: "",
-    Gender: "",
-    phone: "",
-    password: ""
-  });
-  const handleclick = (e) => {
-    e.preventDefault();
-    let temp = input.Name;
-    let address = input.email;
-    let password = input.password;
-    temp = temp.replace(/\s+/g, "");
-    var RegEx = /^[a-z0-9]+$/i;
+  const [input, setinput] = useState([
+    {
+      name: "",
+      email: "",
+      gender: "male",
+      phone: "",
+      password: ""
+    }
+  ]);
+  const handleclick = () => {
+    let main = input[0];
+    console.log(main);
+    let temp = main["name"];
+    let address = main["email"];
+    let password = main["password"];
+    let gender = main["gender"];
+    let phone = main["phone"];
     if (
-      input.email === "" ||
-      input.Name === "" ||
-      input.password === "" ||
-      input.Gender === "" ||
-      input.phone === ""
+      temp === "" ||
+      address === "" ||
+      password === "" ||
+      gender === "" ||
+      phone === ""
     ) {
       setErrorMessage("All fields are mandatory");
       return;
     }
-    if (!RegEx.test(temp)) {
+    let cnt1 = 0;
+    let cnt2 = 0;
+    for (let i = 0; i < temp.length; i++) {
+      if (
+        (temp[i] >= "a" && temp[i] <= "z") ||
+        (temp[i] >= "A" && temp[i] <= "Z")
+      ) {
+        cnt1++;
+      } else if (Number(temp[i]) >= 0 && Number(temp[i]) <= 9) {
+        cnt2++;
+      }
+      if (cnt1 && cnt2) {
+        break;
+      }
+    }
+
+    if (!cnt1 || !cnt2) {
       setErrorMessage("Name is not alphanumeric");
       return;
     }
@@ -36,44 +55,41 @@ const App = () => {
       return;
     }
 
-    if (isNaN(input.phone)) {
+    if (isNaN(main["phone"])) {
       setErrorMessage("Phone Number must contain only numbers");
       return;
     }
-    if (password.length < 6) {
+    if (main["password"].length < 6) {
       setErrorMessage("Password must contain atleast 6 letters");
       return;
     }
-    let info = input.email;
+    let info = main["email"];
     info = info.substr(0, info.indexOf("@"));
     console.log(info);
     setErrorMessage("Hello " + info);
-    console.log(RegEx.test(temp));
-    console.log(input);
   };
   const handlechange = (e) => {
-    setinput((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value
-    }));
+    let dup = input;
+    dup = dup[0];
+    dup[e.target.name] = e.target.value;
+    setinput([dup]);
   };
-
   return (
     <div id="main">
       <div>{ErrorMessage}</div>
-
       <label>Name:</label>
-      <input data-testid="name" name="Name" onChange={handlechange} />
+      <input data-testid="name" name="name" onChange={handlechange} />
       <br />
       <label>Email address:</label>
       <input data-testid="email" name="email" onChange={handlechange} />
       <br />
       <label>Gender:</label>
-      <select defaultValue="selectgender" name="Gender" onChange={handlechange}>
-        <option defaultValue>Male</option>
-        <option value="Female">Female</option>
-        <option value="others">Others</option>
-      </select>
+      <input
+        value="male"
+        data-testid="gender"
+        name="gender"
+        onChange={handlechange}
+      />
       <br />
       <label>Phone number:</label>
       <input data-testid="phoneNumber" name="phone" onChange={handlechange} />
