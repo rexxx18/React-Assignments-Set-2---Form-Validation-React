@@ -24,11 +24,11 @@ const App = () => {
       input.Gender === "" ||
       input.phone === ""
     ) {
-      setErrorMessage("Error Message: All fields are mandatory");
+      setErrorMessage("All fields are mandatory");
       return;
     }
     if (!RegEx.test(temp)) {
-      setErrorMessage("Error Message: Name is not alphanumeric");
+      setErrorMessage("Name is not alphanumeric");
       return;
     }
     if (!address.includes("@")) {
@@ -37,11 +37,11 @@ const App = () => {
     }
 
     if (isNaN(input.phone)) {
-      setErrorMessage("Error Message: Phone Number must contain only numbers");
+      setErrorMessage("Phone Number must contain only numbers");
       return;
     }
     if (password.length < 6) {
-      setErrorMessage("Error Message: Password must contain atleast 6 letters");
+      setErrorMessage("Password must contain atleast 6 letters");
       return;
     }
     let info = input.email;
