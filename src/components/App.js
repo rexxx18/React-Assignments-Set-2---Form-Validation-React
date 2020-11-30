@@ -12,9 +12,17 @@ const App = () => {
       password: ""
     }
   ]);
-  const isEmailValid = (emailValue) => {
-    return emailValue.includes("@");
-  };
+  function ValidateEmail(mail) {
+    if (
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+        mail
+      )
+    ) {
+      return true;
+    }
+
+    return false;
+  }
   const handleclick = () => {
     let main = input[0];
     console.log(main);
@@ -52,7 +60,7 @@ const App = () => {
     if (!cnt1 || !cnt2) {
       setErrorMessage("Name is not alphanumeric");
       return;
-    } else if (!isEmailValid(address)) {
+    } else if (!ValidateEmail(address)) {
       setErrorMessage("Email must contain @");
       return;
     }
