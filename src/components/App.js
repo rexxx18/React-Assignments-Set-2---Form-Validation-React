@@ -14,9 +14,7 @@ const App = () => {
   ]);
   function ValidateEmail(mail) {
     if (
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
-        mail
-      )
+      mail.includes('@')
     ) {
       return true;
     }
